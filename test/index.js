@@ -32,3 +32,22 @@ test('Create markdown component', function(t){
         callback();
     });
 });
+
+test('Markdown options', function(t){
+    t.plan(1);
+    createHarness(function(rootEl, callback){
+        var component = fastn('markdown', {
+            options: {
+                breaks: true
+            },
+            content: 'foo\nbar'
+        });
+
+        component.render();
+        rootEl.appendChild(component.element);
+
+        t.equal(component.element.querySelectorAll('br').length, 1, 'Contains configured br');
+
+        callback();
+    });
+});

@@ -4,13 +4,19 @@ module.exports = function(fastn, component, type, settings, children){
     settings.tagName = component._tagName || type;
 
     component.extend('_generic', settings, children);
-    component.setProperty('content', fastn.property('', function(){
+
+    function update(){
         if(!component.element){
             return;
         }
 
-        component.element.innerHTML = marked(component.content());
-    }));
+        var options = component.options() || {};
+
+        component.element.innerHTML = marked(component.content(), options);
+    }
+
+    component.setProperty('options', fastn.property('', update));
+    component.setProperty('content', fastn.property({}, update));
 
     return component;
 };

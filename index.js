@@ -12,7 +12,17 @@ module.exports = function(fastn, component, type, settings, children){
 
         var options = component.options();
 
-        component.element.innerHTML = marked(component.content(), options);
+        marked(component.content(), options, function(error, response) {
+            var html = "";
+            
+            if (error){
+                this.emit("error", error);
+            } else {
+                html = response;
+            }
+            
+            component.element.innerHTML = html;
+        });
     }
 
     component.setProperty('options', fastn.property({}, update));

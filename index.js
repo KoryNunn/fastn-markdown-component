@@ -12,10 +12,16 @@ module.exports = function(fastn, component, type, settings, children){
 
         var options = component.options() || {};
 
-        marked(component.content(), options, function(error, html) {
-            if (!error){
-                component.element.innerHTML = html;
+        marked(component.content(), options, function(error, response) {
+            var html = "";
+            
+            if (error){
+                this.emit("error", error);
+            } else {
+                html = response;
             }
+            
+            component.element.innerHTML = html;
         });
     }
 

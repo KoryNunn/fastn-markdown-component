@@ -14,13 +14,13 @@ module.exports = function(fastn, component, type, settings, children){
 
         marked(component.content(), options, function(error, response) {
             var html = "";
-            
+
             if (error){
-                this.emit("error", error);
+                component.emit("error", error);
             } else {
                 html = response;
             }
-            
+
             component.element.innerHTML = html;
         });
     }

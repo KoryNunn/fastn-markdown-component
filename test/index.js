@@ -58,3 +58,26 @@ test('Markdown options', function(t){
         callback();
     });
 });
+
+test('Handles errors', function(t){
+    t.plan(1);
+    createHarness(function(rootEl, callback){
+        var component = fastn('markdown', {
+            content: '```javascript\nfoo\n```',
+            options: {
+                highlight: function(code, something, callback){
+                    callback('Error');
+                }
+            }
+        });
+
+        component.on('error', () => {}); // ignore generally
+        component.once('error', function(){
+            t.pass();
+        });
+
+        component.render();
+
+        callback();
+    });
+});

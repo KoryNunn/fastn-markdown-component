@@ -12,5 +12,8 @@ var fastn = require('fastn')(
     })
 );
 
-fastn('markdown', { content: '# Hello World' });
+fastn('markdown', {
+    content: '# Hello World',
+    options: (marked options object)
+});
 ```

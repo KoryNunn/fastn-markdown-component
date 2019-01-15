@@ -10,7 +10,7 @@ module.exports = function(fastn, component, type, settings, children){
             return;
         }
 
-        var options = component.options() || {};
+        var options = component.options();
 
         component.element.innerHTML = marked(component.content(), options);
     }

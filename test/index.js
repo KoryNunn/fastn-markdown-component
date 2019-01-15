@@ -1,5 +1,12 @@
 var test = require('tape');
+var MockBrowser = require('mock-browser').mocks.MockBrowser;
+var mock = new MockBrowser();
 var markdownComponent = require('../');
+
+global.document = mock.getDocument();
+global.window = mock.getWindow();
+global.Node = global.window.Node;
+
 var fastn = require('fastn')(
     require('fastn/domComponents')({
         markdown: markdownComponent

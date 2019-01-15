@@ -3,7 +3,7 @@
   "version": "1.1.2",
   "main": "index.js",
   "scripts": {
-    "test": "browserify ./test/index.js > ./test/index.browser.js",
+    "test": "covert ./test/index.js",
     "watch": "watchify -d ./test/index.js -o ./test/index.browser.js"
   },
   "author": "",
@@ -13,7 +13,9 @@
   },
   "devDependencies": {
     "browserify": "^16.2.3",
+    "covert": "^1.1.1",
     "fastn": "^2.12.0",
+    "mock-browser": "^0.92.14",
     "tape": "^4.9.2",
     "watchify": "^3.11.0"
   },

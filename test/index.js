@@ -1,5 +1,12 @@
 var test = require('tape');
+var MockBrowser = require('mock-browser').mocks.MockBrowser;
+var mock = new MockBrowser();
 var markdownComponent = require('../');
+
+global.document = mock.getDocument();
+global.window = mock.getWindow();
+global.Node = global.window.Node;
+
 var fastn = require('fastn')(
     require('fastn/domComponents')({
         markdown: markdownComponent
@@ -47,6 +54,29 @@ test('Markdown options', function(t){
         rootEl.appendChild(component.element);
 
         t.equal(component.element.querySelectorAll('br').length, 1, 'Contains configured br');
+
+        callback();
+    });
+});
+
+test('Handles errors', function(t){
+    t.plan(1);
+    createHarness(function(rootEl, callback){
+        var component = fastn('markdown', {
+            content: '```javascript\nfoo\n```',
+            options: {
+                highlight: function(code, something, callback){
+                    callback('Error');
+                }
+            }
+        });
+
+        component.on('error', () => {}); // ignore generally
+        component.once('error', function(){
+            t.pass();
+        });
+
+        component.render();
 
         callback();
     });

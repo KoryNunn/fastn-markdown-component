@@ -12,9 +12,9 @@ module.exports = function(fastn, component, type, settings, children){
 
         var options = component.options() || {};
 
-        marked(component.content(), options, function(err, res) {
-            if (!err){
-                component.element.innerHTML = res;
+        marked(component.content(), options, function(error, html) {
+            if (!error){
+                component.element.innerHTML = html;
             }
         });
     }

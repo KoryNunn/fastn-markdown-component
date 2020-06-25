@@ -12,7 +12,7 @@ module.exports = function(fastn, component, type, settings, children){
 
         var options = component.options();
 
-        marked(component.content(), options, function(error, response) {
+        marked(component.content() || '', options, function(error, response) {
             var html = "";
 
             if (error){

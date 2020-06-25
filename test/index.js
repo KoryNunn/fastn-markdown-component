@@ -81,3 +81,18 @@ test('Handles errors', function(t){
         callback();
     });
 });
+
+test('Handles no content', function(t){
+    t.plan(1);
+    createHarness(function(rootEl, callback){
+        var component = fastn('markdown', {
+            content: null
+        });
+
+        component.render();
+
+        t.pass();
+
+        callback();
+    });
+});

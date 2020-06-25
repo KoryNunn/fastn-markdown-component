@@ -1,6 +1,6 @@
 {
   "name": "fastn-markdown-component",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "index.js",
   "scripts": {
     "test": "c8 node ./test/index.js",
